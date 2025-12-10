@@ -1,39 +1,41 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+
+from matplotlib.pyplot import grid
 # Import the logic class from the other file
 from columnar_cipher import ColumnarTranspositionCipher
 
 class CipherApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Cyber Security: Transposition Cipher Visualizer")
+        self.root.title("Transposition Cipher")
         self.root.geometry("800x600")
 
         # --- Top Section: Inputs ---
         # LabelFrame creates a box with a title around the inputs
-        input_frame = ttk.LabelFrame(root, text="Configuration", padding=10)
+        input_frame = ttk.LabelFrame(root, text="Input Key and Message/Ciphertext", padding=10)
         input_frame.pack(fill="x", padx=10, pady=5)
 
         # Grid Layout: Row 0 is for Key, Row 1 is for Message
         ttk.Label(input_frame, text="Keyword (Key):").grid(row=0, column=0, sticky="w")
         self.key_entry = ttk.Entry(input_frame, width=30)
         self.key_entry.grid(row=0, column=1, padx=5, pady=5)
-        self.key_entry.insert(0, "SECRET") # Default text
+        self.key_entry.insert(0, "SAMPLE") # Default text
 
         ttk.Label(input_frame, text="Message:").grid(row=1, column=0, sticky="w")
-        self.msg_entry = ttk.Entry(input_frame, width=50)
+        self.msg_entry = ttk.Entry(input_frame, width=70)
         self.msg_entry.grid(row=1, column=1, padx=5, pady=5)
-        self.msg_entry.insert(0, "ATTACK AT DAWN") # Default text
+        self.msg_entry.insert(0, "THIS IS A SUPER SAMPLE") # Default text
 
         # --- Middle Section: Buttons ---
         btn_frame = ttk.Frame(root, padding=10)
         btn_frame.pack(fill="x")
         
         # Buttons trigger the functions (command=self.run_encrypt)
-        encrypt_btn = ttk.Button(btn_frame, text="ENCRYPT (Send Packet)", command=self.run_encrypt)
+        encrypt_btn = ttk.Button(btn_frame, text="ENCRYPT", command=self.run_encrypt)
         encrypt_btn.pack(side="left", padx=20, expand=True)
         
-        decrypt_btn = ttk.Button(btn_frame, text="DECRYPT (Receive Packet)", command=self.run_decrypt)
+        decrypt_btn = ttk.Button(btn_frame, text="DECRYPT", command=self.run_decrypt)
         decrypt_btn.pack(side="left", padx=20, expand=True)
 
         # --- Bottom Section: Results & Visualization ---
@@ -164,7 +166,8 @@ class CipherApp:
         
         # Result
         # Flatten grid to show reading process
-        flat = "".join(["".join(r) for r in grid])
+        flat = "".join(''.join(row) for row in grid)
+
         log.append(f"\n4. Read Row-by-Row (Plaintext):")
         log.append(f"   {flat}")
         
