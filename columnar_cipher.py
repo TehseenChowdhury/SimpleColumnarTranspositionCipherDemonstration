@@ -44,7 +44,7 @@ class ColumnarTranspositionCipher:
             for row in grid:
                 ciphertext += row[k]
                 
-        return ciphertext
+        return ciphertext, grid
 
     def decrypt(self, ciphertext):
         """
@@ -70,4 +70,4 @@ class ColumnarTranspositionCipher:
             plaintext += "".join(row)
             
         # 4. Clean up padding
-        return plaintext.rstrip("_")
+        return plaintext.rstrip("_"), grid
