@@ -93,6 +93,8 @@ class CipherApp:
             self.output_entry.delete(0, tk.END)
             self.output_entry.insert(0, plaintext)
 
+            self.msg_entry.delete(0, tk.END)
+            self.msg_entry.insert(0, plaintext)
             self.visualize_decrypt(key, grid, ciphertext)
         except Exception as e:
             messagebox.showerror("Decryption Error", str(e))
